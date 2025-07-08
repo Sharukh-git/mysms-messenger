@@ -23,7 +23,7 @@
             <span class="timestamp">{{ msg.created_at | date:'short' }}</span>
           </div>
           <div class="body">{{ msg.body }}</div>
-          <div class="char-count">{{ msg.body.length }}/250</div>
+          <div class="char-count">{{ msg.body?.length || 0 }}/250</div>
         </div>
       </li>
     </ul>

@@ -2,13 +2,16 @@ class Api::MessagesController < ApplicationController
   require 'twilio-ruby'
 
   def index
-    session_id = request.session[:session_id]
-    messages = Message.where(session_id: session_id).order(created_at: :desc)
-    render json: messages
-  end
+  session_id = request.session[:session_id]
+  Rails.logger.info "🔍 INDEX SESSION: #{session_id}"
+  messages = Message.where(session_id: session_id).order(created_at: :desc)
+  render json: messages
+end
+
 
   def create
     session_id = request.session[:session_id] ||= SecureRandom.hex(10)
+    Rails.logger.info "📝 CREATE SESSION: #{session_id}"
     to = params[:to]
     body = params[:body]
 

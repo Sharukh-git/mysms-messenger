@@ -51,7 +51,7 @@
 
 
     <!-- Character Counter -->
-    <div class="char-count">{{ body.length }}/250</div>
+    <div class="char-count">{{ body?.length || 0 }}/250</div>
 
     <!-- Buttons -->
     <div class="form-actions">

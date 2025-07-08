@@ -11,10 +11,14 @@ export class MessageService {
   constructor(private http: HttpClient) {}
 
   sendMessage(to: string, body: string) {
-    return this.http.post(`${this.apiUrl}/messages`, { to, body });
-  }
+  return this.http.post(`${this.apiUrl}/messages`, { to, body }, {
+    withCredentials: true
+  });
+}
 
   getMessages() {
-    return this.http.get(`${this.apiUrl}/messages`);
-  }
+  return this.http.get(`${this.apiUrl}/messages`, {
+    withCredentials: true
+  });
+ }
 }
