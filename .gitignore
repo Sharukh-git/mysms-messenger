@@ -1,0 +1,18 @@
+# Rails
+/log
+/tmp
+/.bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/system
+/node_modules
+/.env
+/.DS_Store
+
+# Angular
+/frontend/node_modules
+/frontend/dist
+
+# Others
+.env
+*.log
