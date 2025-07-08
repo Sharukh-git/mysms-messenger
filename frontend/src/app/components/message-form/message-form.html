@@ -1,0 +1,21 @@
+<div class="form-container">
+  <h2>New Message</h2>
+
+  <label for="to">Phone Number</label>
+  <input id="to" type="text" [(ngModel)]="to" maxlength="15" placeholder="Enter phone number" />
+
+  <label for="body">Message</label>
+  <textarea
+    id="body"
+    [(ngModel)]="body"
+    maxlength="250"
+    placeholder="Type your message"
+    rows="4"
+  ></textarea>
+  <div class="char-count">{{ body.length }}/250</div>
+
+  <div class="form-actions">
+    <button type="button" class="clear" (click)="to=''; body=''">Clear</button>
+    <button type="submit" class="submit" (click)="onSubmit()">Submit</button>
+  </div>
+</div>

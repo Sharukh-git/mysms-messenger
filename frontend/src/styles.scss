@@ -1,1 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+
+.container {
+  display: flex;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.form-container,
+.message-list-container {
+  flex: 1;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  min-width: 320px;
+  min-height: 420px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #777;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.clear,
+button.submit {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+button.clear {
+  background-color: transparent;
+  color: #555;
+  text-decoration: underline;
+}
+
+button.clear:hover {
+  color: #000;
+}
+
+button.submit {
+  background-color: #000;
+  color: #fff;
+}
+
+button.submit:hover {
+  background-color: #333;
+}
