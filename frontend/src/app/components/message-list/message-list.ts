@@ -13,6 +13,7 @@ import { MessageService } from '../../services/message.service';
 export class MessageListComponent implements OnInit {
   messages: any[] = [];
   loading = false;
+  errorMessage: string | null = null;
 
   constructor(private messageService: MessageService) {}
 
@@ -22,6 +23,8 @@ export class MessageListComponent implements OnInit {
 
   fetchMessages() {
     this.loading = true;
+    this.errorMessage = null;
+
     this.messageService.getMessages().subscribe({
       next: (data: any) => {
         this.messages = data;
@@ -29,6 +32,7 @@ export class MessageListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching messages', err);
+        this.errorMessage = 'Failed to load messages. Please try again later.';
         this.loading = false;
       }
     });

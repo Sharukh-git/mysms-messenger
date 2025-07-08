@@ -1,19 +1,31 @@
 <div class="message-list-container">
-  <h2>Message History ({{ messages.length }})</h2>
 
+  <!-- While loading -->
   <div *ngIf="loading">Loading messages...</div>
-  <div *ngIf="!loading && messages.length === 0">No messages yet.</div>
 
-  <ul *ngIf="!loading && messages.length > 0">
-    <li *ngFor="let msg of messages">
-      <div class="message-box">
-        <div class="header">
-          <span class="phone">{{ msg.to }}</span>
-          <span class="timestamp">{{ msg.created_at | date:'short' }}</span>
+  <!-- When there is an error -->
+  <ng-container *ngIf="errorMessage">
+    <h2>Message History</h2>
+    <div class="error-message">{{ errorMessage }}</div>
+  </ng-container>
+
+  <!-- When not loading and no error -->
+  <ng-container *ngIf="!loading && !errorMessage">
+    <h2>Message History ({{ messages.length }})</h2>
+
+    <div *ngIf="messages.length === 0">No messages yet.</div>
+
+    <ul *ngIf="messages.length > 0">
+      <li *ngFor="let msg of messages">
+        <div class="message-box">
+          <div class="header">
+            <span class="phone">{{ msg.to }}</span>
+            <span class="timestamp">{{ msg.created_at | date:'short' }}</span>
+          </div>
+          <div class="body">{{ msg.body }}</div>
+          <div class="char-count">{{ msg.body.length }}/250</div>
         </div>
-        <div class="body">{{ msg.body }}</div>
-        <div class="char-count">{{ msg.body.length }}/250</div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </ng-container>
 </div>
