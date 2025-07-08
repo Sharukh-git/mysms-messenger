@@ -1,4 +1,4 @@
-
+/* Layout container */
 .container {
   display: flex;
   gap: 40px;
@@ -9,6 +9,7 @@
   flex-wrap: wrap;
 }
 
+/* Card-style form and list */
 .form-container,
 .message-list-container {
   flex: 1;
@@ -20,6 +21,7 @@
   min-height: 420px;
 }
 
+/* Form elements */
 label {
   display: block;
   margin-top: 12px;
@@ -43,6 +45,7 @@ textarea {
   min-height: 100px;
 }
 
+/* Character counter */
 .char-count {
   font-size: 12px;
   color: #777;
@@ -50,6 +53,7 @@ textarea {
   margin-top: 4px;
 }
 
+/* Action buttons */
 .form-actions {
   margin-top: 16px;
   display: flex;
@@ -83,6 +87,6 @@ button.submit {
   color: #fff;
 }
 
-button.submit:hover {
+button.submit:hover:not(:disabled) {
   background-color: #333;
 }

@@ -1,21 +1,64 @@
-<div class="form-container">
-  <h2>New Message</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+  <div class="form-container">
+    <h2>New Message</h2>
 
-  <label for="to">Phone Number</label>
-  <input id="to" type="text" [(ngModel)]="to" maxlength="15" placeholder="Enter phone number" />
+    <!-- Phone Number -->
+    <label for="to">Phone Number</label>
+    <input
+      id="to"
+      name="to"
+      type="text"
+      [(ngModel)]="to"
+      required
+      maxlength="16"
+      placeholder="Enter phone number"
+      [attr.autocomplete]="'off'"
+      (input)="validateInput(); checkFormValidity()"
+      (blur)="onPhoneBlur()"
+    />
 
-  <label for="body">Message</label>
-  <textarea
-    id="body"
-    [(ngModel)]="body"
-    maxlength="250"
-    placeholder="Type your message"
-    rows="4"
-  ></textarea>
-  <div class="char-count">{{ body.length }}/250</div>
+    <!-- Error: Invalid characters -->
+    <div class="error" *ngIf="hasInvalidChars">
+      Enter a valid phone number.
+    </div>
 
-  <div class="form-actions">
-    <button type="button" class="clear" (click)="to=''; body=''">Clear</button>
-    <button type="submit" class="submit" (click)="onSubmit()">Submit</button>
+    <!-- Error: Digit length, only after blur or submit -->
+    <div
+      class="error"
+      *ngIf="(phoneBlurred || form.submitted) && !hasInvalidChars && !isPhoneDigitLengthValid()"
+    >
+      Enter a valid phone number.
+    </div>
+
+    <!-- Message -->
+    <label for="body">Message</label>
+    <textarea
+      id="body"
+      name="body"
+      [(ngModel)]="body"
+      required
+      minlength="1"
+      maxlength="250"
+      placeholder="Type your message"
+      rows="4"
+      (input)="checkFormValidity()"
+      (blur)="onMessageBlur()"
+    ></textarea>
+
+    <div class="error" *ngIf="(form.submitted || messageBlurred) && body.trim().length < 1">
+        Message must be at least 1 character long.
+    </div>
+
+
+    <!-- Character Counter -->
+    <div class="char-count">{{ body.length }}/250</div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+      <button type="button" class="clear" (click)="clearForm(form)">Clear</button>
+      <button type="submit" class="submit" [disabled]="!formValid || isLoading">
+        {{ isLoading ? 'Sending...' : 'Submit' }}
+      </button>
+    </div>
   </div>
-</div>
+</form>

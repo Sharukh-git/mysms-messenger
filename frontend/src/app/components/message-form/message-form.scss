@@ -2,3 +2,24 @@
 .form-container {
   max-width: 400px;
 }
+
+/* Validation error message */
+.error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* Red border when invalid and touched */
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+}
+
+/* Disabled state */
+button.submit:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
