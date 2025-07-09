@@ -12,17 +12,17 @@
       required
       maxlength="16"
       placeholder="Enter phone number"
-      [attr.autocomplete]="'off'"
+      autocomplete="off"
       (input)="validateInput(); checkFormValidity()"
       (blur)="onPhoneBlur()"
     />
 
-    <!-- Error: Invalid characters -->
+    <!-- Validation: invalid characters -->
     <div class="error" *ngIf="hasInvalidChars">
       Enter a valid phone number.
     </div>
 
-    <!-- Error: Digit length, only after blur or submit -->
+    <!-- Validation: digit length -->
     <div
       class="error"
       *ngIf="(phoneBlurred || form.submitted) && !hasInvalidChars && !isPhoneDigitLengthValid()"
@@ -45,15 +45,15 @@
       (blur)="onMessageBlur()"
     ></textarea>
 
+    <!-- Validation: message too short -->
     <div class="error" *ngIf="(form.submitted || messageBlurred) && body.trim().length < 1">
-        Message must be at least 1 character long.
+      Message must be at least 1 character long.
     </div>
 
-
     <!-- Character Counter -->
-    <div class="char-count">{{ body?.length || 0 }}/250</div>
+    <div class="char-count">{{ body.length }}/250</div>
 
-    <!-- Buttons -->
+    <!-- Action Buttons -->
     <div class="form-actions">
       <button type="button" class="clear" (click)="clearForm(form)">Clear</button>
       <button type="submit" class="submit" [disabled]="!formValid || isLoading">

@@ -1,25 +1,83 @@
-
-.form-container {
-  max-width: 400px;
+h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-/* Validation error message */
+label {
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  background: #fff;
+}
+
+textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+
 .error {
   color: #e74c3c;
   font-size: 0.85rem;
   margin-top: 4px;
 }
 
-/* Red border when invalid and touched */
+
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border-color: #e74c3c;
 }
 
-/* Disabled state */
-button.submit:disabled {
-  background-color: #ccc !important;
-  color: #666 !important;
+
+.clear {
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.submit {
+  background-color: black;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
-  opacity: 0.6;
 }

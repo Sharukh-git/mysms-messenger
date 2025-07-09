@@ -1,31 +1,38 @@
 <div class="message-list-container">
+  <div class="message-header-bar">
+    <h2>Message History <span class="message-count">({{ messages.length }})</span></h2>
+  </div>
 
-  <!-- While loading -->
-  <div *ngIf="loading">Loading messages...</div>
+  <!-- Loading -->
+  <div *ngIf="loading" class="info-message">Loading messages...</div>
 
-  <!-- When there is an error -->
-  <ng-container *ngIf="errorMessage">
-    <h2>Message History</h2>
-    <div class="error-message">{{ errorMessage }}</div>
-  </ng-container>
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <!-- When not loading and no error -->
-  <ng-container *ngIf="!loading && !errorMessage">
-    <h2>Message History ({{ messages.length }})</h2>
+  <!-- No messages -->
+  <div *ngIf="!loading && !errorMessage && messages.length === 0" class="empty-message">
+    No messages yet.
+  </div>
 
-    <div *ngIf="messages.length === 0">No messages yet.</div>
+  <!-- Scrollable list -->
+  <ul *ngIf="messages.length > 0" class="message-scroll" #scrollContainer>
+    <li *ngFor="let msg of messages">
+      
+      <!-- Header outside bubble -->
+      <div class="message-header">
+        <span class="message-to">{{ formatPhone(msg.to) }}</span>
+        <span class="message-date">
+          {{ msg.created_at | date: 'EEEE, MMM d, y h:mm:ss a' }} UTC
+        </span>
+      </div>
 
-    <ul *ngIf="messages.length > 0">
-      <li *ngFor="let msg of messages">
-        <div class="message-box">
-          <div class="header">
-            <span class="phone">{{ msg.to }}</span>
-            <span class="timestamp">{{ msg.created_at | date:'short' }}</span>
-          </div>
-          <div class="body">{{ msg.body }}</div>
-          <div class="char-count">{{ msg.body?.length || 0 }}/250</div>
-        </div>
-      </li>
-    </ul>
-  </ng-container>
+      <!-- Message bubble -->
+      <div class="message-item">
+        <div class="message-body">{{ msg.body }}</div>
+      </div>
+      
+      <div class="message-footer">{{ msg.body?.length || 0 }}/250</div>
+
+    </li>
+  </ul>
 </div>
