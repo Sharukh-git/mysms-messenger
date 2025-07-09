@@ -75,13 +75,12 @@ export class MessageFormComponent {
     this.messageService.sendMessage(this.to.trim(), this.body.trim()).subscribe({
       next: () => {
         alert('Message sent!');
-        this.clearForm(form);
-        this.isLoading = false;
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error sending message', err);
         alert('Failed to send message.');
-        this.isLoading = false;
+        window.location.reload();
       }
     });
   }

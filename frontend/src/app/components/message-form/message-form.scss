@@ -38,10 +38,11 @@ textarea {
 
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 12px;
   margin-top: 20px;
 }
-
 
 
 .error {
@@ -80,4 +81,27 @@ textarea.ng-invalid.ng-touched {
 .submit:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  input,
+  textarea {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .submit {
+    width: 100%;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clear {
+    align-self: flex-start;
+  }
 }

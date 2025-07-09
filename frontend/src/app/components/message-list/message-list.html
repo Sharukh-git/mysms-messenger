@@ -30,9 +30,19 @@
       <div class="message-item">
         <div class="message-body">{{ msg.body }}</div>
       </div>
-      
-      <div class="message-footer">{{ msg.body?.length || 0 }}/250</div>
 
-    </li>
-  </ul>
+      <div class="message-footer">
+  {{ msg.body?.length || 0 }}/250
+
+    <div class="delivery-status" *ngIf="msg.status">
+        <ng-container [ngSwitch]="msg.status">
+        <span *ngSwitchCase="'delivered'" class="delivered">✅ Delivered</span>
+        <span *ngSwitchCase="'undelivered'" class="failed">❌ Undelivered</span>
+        <span *ngSwitchCase="'failed'" class="failed">❌ Failed</span>
+        <span *ngSwitchDefault class="pending">⏳ {{ msg.status }}</span>
+        </ng-container>
+     </div>
+   </div>
+  </li>
+ </ul>
 </div>
