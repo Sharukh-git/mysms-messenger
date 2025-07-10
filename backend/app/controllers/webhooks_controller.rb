@@ -1,6 +1,6 @@
 class WebhooksController < ApplicationController
-  
-  skip_before_action :authenticate_user!, only: [:sms_status]
+  # Skip the authentication before_action, note the custom method name here:
+  skip_before_action :authenticate_user_unless_devise, only: [:sms_status]
 
   def sms_status
     sid = params["MessageSid"]
@@ -19,3 +19,4 @@ class WebhooksController < ApplicationController
     head :ok
   end
 end
+# Note: This controller is specifically for handling Twilio SMS status updates.

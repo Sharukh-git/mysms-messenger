@@ -1,9 +1,6 @@
 class Api::Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-  # Skip Devise's built-in before_action to avoid CSRF + session checks for APIs
-  skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
 
   def create
     user_params = extract_user_params

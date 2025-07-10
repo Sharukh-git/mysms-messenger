@@ -1,8 +1,8 @@
 class Api::MessagesController < ApplicationController
-  before_action :authenticate_user!
   require 'twilio-ruby'
 
   def index
+    # Fetch messages belonging to current user, newest first
     messages = current_user.messages.order_by(created_at: :desc)
     render json: messages
   end
@@ -27,9 +27,10 @@ class Api::MessagesController < ApplicationController
         status: 'sent',
         twilio_sid: twilio_message.sid
       )
-
     rescue => e
       Rails.logger.error "Twilio Error: #{e.message}"
+
+      # Record message as failed if Twilio API call fails
       message = current_user.messages.create!(
         to: to,
         body: body,
