@@ -1,4 +1,4 @@
-# MySMS Messenger 📩 — Send & track SMS messages via Twilio
+# MySMS Messenger 📩
 
 MySMS Messenger is a full-stack web application that enables users to send and view SMS messages using the Twilio API.
 
