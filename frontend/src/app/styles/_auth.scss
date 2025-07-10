@@ -146,3 +146,33 @@ body {
     pointer-events: none;
   }
 }
+
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 20px 16px;
+    border-radius: 10px;
+  }
+
+  .auth-container h2 {
+    font-size: 20px;
+  }
+
+  .auth-container input,
+  .auth-container form > button[type='submit'] {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .toggle-password {
+    font-size: 20px;
+    right: 8px;
+  }
+
+  .auth-container .link {
+    font-size: 13px;
+  }
+
+  .error {
+    font-size: 13px;
+  }
+}

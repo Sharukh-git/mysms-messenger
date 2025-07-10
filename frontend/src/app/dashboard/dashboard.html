@@ -1,6 +1,6 @@
 <div class="top-bar">
   <h1 class="title">MY SMS MESSENGER</h1>
-  <button class="logout-button" (click)="logout()">Logout</button>
+  <button class="logout-button desktop-logout" (click)="logout()">Logout</button>
 </div>
 
 <div class="container">
@@ -8,3 +8,6 @@
   <app-message-list></app-message-list>
 </div>
 
+<div class="mobile-logout-wrapper">
+  <button class="mobile-logout" (click)="logout()">Logout</button>
+</div>
