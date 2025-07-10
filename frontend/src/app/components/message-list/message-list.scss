@@ -1,3 +1,4 @@
+// Section header styles
 .message-header-bar {
   margin-bottom: 12px;
 }
@@ -13,11 +14,13 @@ h2 {
   color: #444;
 }
 
+// Scroll container for message list
 .message-list-container {
   overflow-y: auto;
   max-height: 480px;
 }
 
+// List layout reset
 ul {
   list-style: none;
   padding: 0;
@@ -28,6 +31,7 @@ li {
   margin-bottom: 12px;
 }
 
+// Message bubble styling
 .message-item {
   background: #f9f9f9;
   border: 1px solid #ccc;
@@ -35,6 +39,7 @@ li {
   padding: 12px;
 }
 
+// Header inside each message (phone number + date)
 .message-header {
   display: flex;
   justify-content: space-between;
@@ -44,6 +49,7 @@ li {
   color: #444;
 }
 
+// Message content
 .message-body {
   font-size: 14px;
   line-height: 1.4;
@@ -51,6 +57,7 @@ li {
   white-space: pre-wrap;
 }
 
+// Footer: character count and delivery status
 .message-footer {
   text-align: right;
   font-size: 12px;
@@ -58,6 +65,7 @@ li {
   margin-top: -8px;
 }
 
+// Delivery status indicators
 .delivery-status {
   font-size: 12px;
   margin-top: 4px;
@@ -76,7 +84,7 @@ li {
   }
 }
 
-
+// Responsive layout adjustments
 @media (max-width: 768px) {
   .message-list-container {
     display: flex;
@@ -133,5 +141,3 @@ li {
     margin-top: 4px;
   }
 }
-
-

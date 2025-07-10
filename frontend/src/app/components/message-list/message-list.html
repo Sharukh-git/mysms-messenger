@@ -3,22 +3,22 @@
     <h2>Message History <span class="message-count">({{ messages.length }})</span></h2>
   </div>
 
-  <!-- Loading -->
+  <!-- Loading state -->
   <div *ngIf="loading" class="info-message">Loading messages...</div>
 
-  <!-- Error -->
+  <!-- Error state -->
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <!-- No messages -->
+  <!-- Empty state -->
   <div *ngIf="!loading && !errorMessage && messages.length === 0" class="empty-message">
     No messages yet.
   </div>
 
-  <!-- Scrollable list -->
+  <!-- Scrollable message list -->
   <ul *ngIf="messages.length > 0" class="message-scroll" #scrollContainer>
     <li *ngFor="let msg of messages">
-      
-      <!-- Header outside bubble -->
+
+      <!-- Message header: phone and timestamp -->
       <div class="message-header">
         <span class="message-to">{{ formatPhone(msg.to) }}</span>
         <span class="message-date">
@@ -26,23 +26,25 @@
         </span>
       </div>
 
-      <!-- Message bubble -->
+      <!-- Message body bubble -->
       <div class="message-item">
         <div class="message-body">{{ msg.body }}</div>
       </div>
 
+      <!-- Footer: character count and delivery status -->
       <div class="message-footer">
-  {{ msg.body?.length || 0 }}/250
+        {{ msg.body?.length || 0 }}/250
 
-    <div class="delivery-status" *ngIf="msg.status">
-        <ng-container [ngSwitch]="msg.status">
-        <span *ngSwitchCase="'delivered'" class="delivered">✅ Delivered</span>
-        <span *ngSwitchCase="'undelivered'" class="failed">❌ Undelivered</span>
-        <span *ngSwitchCase="'failed'" class="failed">❌ Failed</span>
-        <span *ngSwitchDefault class="pending">⏳ {{ msg.status }}</span>
-        </ng-container>
-     </div>
-   </div>
-  </li>
- </ul>
+        <!-- Delivery status indicator (Twilio webhook status) -->
+        <div class="delivery-status" *ngIf="msg.status">
+          <ng-container [ngSwitch]="msg.status">
+            <span *ngSwitchCase="'delivered'" class="delivered">✅ Delivered</span>
+            <span *ngSwitchCase="'undelivered'" class="failed">❌ Undelivered</span>
+            <span *ngSwitchCase="'failed'" class="failed">❌ Failed</span>
+            <span *ngSwitchDefault class="pending">⏳ {{ msg.status }}</span>
+          </ng-container>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

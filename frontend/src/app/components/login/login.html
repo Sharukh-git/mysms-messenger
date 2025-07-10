@@ -1,20 +1,23 @@
 <div class="page-wrapper">
   <div class="auth-container">
 
-    
+    <!-- Show while backend health check is in progress -->
     <div *ngIf="isCheckingBackend" class="info-message">
       🔄 Checking backend status...
     </div>
 
-    
+    <!-- Show error if backend is not ready -->
     <div *ngIf="!isCheckingBackend && !isBackendReady" class="error-message">
       ⚠️ Backend is starting... Please wait a moment.
     </div>
 
-    
+    <!-- Show login form only when backend is ready -->
     <ng-container *ngIf="isBackendReady">
       <h2>Login</h2>
+
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+
+        <!-- Email input -->
         <label for="email">Email</label>
         <input
           type="email"
@@ -24,6 +27,7 @@
           required
         />
 
+        <!-- Password input with toggle visibility button -->
         <label for="password">Password</label>
         <div class="password-wrapper">
           <input
@@ -33,20 +37,28 @@
             [(ngModel)]="password"
             required
           />
-          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+          >
             <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
           </button>
         </div>
 
+        <!-- Submit button -->
         <button
           type="submit"
-          [disabled]="!loginForm?.form || loginForm.invalid || loading">
+          [disabled]="!loginForm?.form || loginForm.invalid || loading"
+        >
           {{ loading ? 'Logging in...' : 'Login' }}
         </button>
 
+        <!-- Error message on login failure -->
         <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
       </form>
 
+      <!-- Link to signup page -->
       <p class="link">
         Don't have an account? <a routerLink="/signup">Sign up</a>
       </p>

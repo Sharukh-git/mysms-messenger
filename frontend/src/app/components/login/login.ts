@@ -6,7 +6,6 @@ import { Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { PingService } from '../../services/ping.service';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,43 +22,48 @@ export class LoginComponent {
   isBackendReady = false;
   isCheckingBackend = true;
 
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private pingService: PingService
+  ) {}
 
-  constructor(private http: HttpClient, private router: Router, private pingService: PingService) {}
-
+  // Toggle password field visibility
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
+  // Handle login form submission
   onSubmit() {
     this.loading = true;
     this.errorMessage = '';
 
-    this.http
-      .post(`${environment.apiUrl}/login`, {
-        user: { email: this.email, password: this.password }
-      }, { withCredentials: true })
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          this.loading = false;
-          this.errorMessage = error.error?.error || 'Login failed.';
-        }
-      });
+    this.http.post(
+      `${environment.apiUrl}/login`,
+      { user: { email: this.email, password: this.password } },
+      { withCredentials: true }
+    ).subscribe({
+      next: () => {
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage = error.error?.error || 'Login failed.';
+      }
+    });
   }
 
+  // Check backend readiness on component init
   ngOnInit(): void {
-  this.pingService.pingBackend().subscribe({
-    next: () => {
-      this.isBackendReady = true;
-      this.isCheckingBackend = false;
-    },
-    error: () => {
-      this.isBackendReady = false;
-      this.isCheckingBackend = false;
-    }
-  });
- }
-
+    this.pingService.pingBackend().subscribe({
+      next: () => {
+        this.isBackendReady = true;
+        this.isCheckingBackend = false;
+      },
+      error: () => {
+        this.isBackendReady = false;
+        this.isCheckingBackend = false;
+      }
+    });
+  }
 }

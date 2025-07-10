@@ -1,7 +1,7 @@
 class Api::Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-
+  # POST /signup
   def create
     user_params = extract_user_params
     return unless user_params
@@ -18,6 +18,7 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
+  # Strong params extractor with error fallback
   def extract_user_params
     if params[:user].present?
       params.require(:user).permit(:email, :password, :password_confirmation)

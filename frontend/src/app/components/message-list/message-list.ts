@@ -25,14 +25,17 @@ export class MessageListComponent implements OnInit, AfterViewChecked {
 
   constructor(private messageService: MessageService) {}
 
+  // Fetch messages on component init
   ngOnInit(): void {
     this.fetchMessages();
   }
 
+  // Auto-scroll after each view update
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
 
+  // Load messages from backend
   fetchMessages(): void {
     this.loading = true;
     this.errorMessage = null;
@@ -51,6 +54,7 @@ export class MessageListComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  // Scrolls to the bottom of the message list
   scrollToBottom(): void {
     if (!this.scrollContainer) return;
     try {
@@ -61,19 +65,16 @@ export class MessageListComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  // Formats phone numbers to XXX-XXX-XXXX
   formatPhone(phone: string): string {
-  const digits = phone.replace(/\D/g, '');
+    const digits = phone.replace(/\D/g, '');
 
-  if (digits.length === 11 && digits.startsWith('1')) {
-    
-    return `${digits.slice(1, 4)}-${digits.slice(4, 7)}-${digits.slice(7)}`;
-  } else if (digits.length === 10) {
-    
-    return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
-  } else {
-    
-    return phone;
+    if (digits.length === 11 && digits.startsWith('1')) {
+      return `${digits.slice(1, 4)}-${digits.slice(4, 7)}-${digits.slice(7)}`;
+    } else if (digits.length === 10) {
+      return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+    } else {
+      return phone;
+    }
   }
- }
-
 }

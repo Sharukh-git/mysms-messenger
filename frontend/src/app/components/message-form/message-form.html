@@ -2,7 +2,7 @@
   <div class="form-container">
     <h2>New Message</h2>
 
-    <!-- Phone Number -->
+    <!-- Phone Number Input -->
     <label for="to">Phone Number</label>
     <input
       id="to"
@@ -22,7 +22,7 @@
       Enter a valid phone number.
     </div>
 
-    <!-- Validation: digit length -->
+    <!-- Validation: digit count -->
     <div
       class="error"
       *ngIf="(phoneBlurred || form.submitted) && !hasInvalidChars && !isPhoneDigitLengthValid()"
@@ -30,7 +30,7 @@
       Enter a valid phone number.
     </div>
 
-    <!-- Message -->
+    <!-- Message Textarea -->
     <label for="body">Message</label>
     <textarea
       id="body"
@@ -45,7 +45,7 @@
       (blur)="onMessageBlur()"
     ></textarea>
 
-    <!-- Validation: message too short -->
+    <!-- Validation: message required -->
     <div class="error" *ngIf="(form.submitted || messageBlurred) && body.trim().length < 1">
       Message must be at least 1 character long.
     </div>

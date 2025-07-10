@@ -21,13 +21,13 @@ export class MessageFormComponent {
 
   constructor(private messageService: MessageService) {}
 
-  // Validates character pattern live (for non-numeric)
+  // Validate phone number input (allows digits and optional leading '+')
   validateInput(): void {
     const regex = /^(\+)?\d*$/;
     this.hasInvalidChars = !regex.test(this.to);
   }
 
-  // On blur, enable length validation
+  // Set flags when fields lose focus
   onPhoneBlur(): void {
     this.phoneBlurred = true;
   }
@@ -36,26 +36,32 @@ export class MessageFormComponent {
     this.messageBlurred = true;
   }
 
-
-  // Get count of digits (excluding '+')
+  // Count numeric digits (excluding '+')
   getDigitCount(): number {
     return this.to.replace(/\D/g, '').length;
   }
 
-  // Is digit length valid (10–15)?
+  // Validate phone number length (10–15 digits)
   isPhoneDigitLengthValid(): boolean {
     const count = this.getDigitCount();
     return count >= 10 && count <= 15;
   }
 
+  // Check full form validity
   isFormValid(): boolean {
-    return !this.hasInvalidChars && this.isPhoneDigitLengthValid() && this.body.trim().length >= 2;
+    return (
+      !this.hasInvalidChars &&
+      this.isPhoneDigitLengthValid() &&
+      this.body.trim().length >= 2
+    );
   }
 
+  // Update validity on every input
   checkFormValidity(): void {
-  this.formValid = this.isFormValid();
+    this.formValid = this.isFormValid();
   }
 
+  // Reset form state
   clearForm(form: NgForm): void {
     this.to = '';
     this.body = '';
@@ -66,12 +72,14 @@ export class MessageFormComponent {
     form.resetForm();
   }
 
+  // Handle form submit
   onSubmit(form: NgForm): void {
     this.phoneBlurred = true;
 
     if (!this.isFormValid()) return;
 
     this.isLoading = true;
+
     this.messageService.sendMessage(this.to.trim(), this.body.trim()).subscribe({
       next: () => {
         alert('Message sent!');

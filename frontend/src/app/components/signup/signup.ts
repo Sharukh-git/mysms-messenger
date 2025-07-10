@@ -19,10 +19,10 @@ export class SignupComponent {
   loading = false;
   errorMessage = '';
 
-  // Password visibility
+  // Password visibility toggle
   showPassword = false;
 
-  // Password validation flags
+  // Password strength validation flags
   passwordLength = false;
   hasUppercase = false;
   hasNumber = false;
@@ -31,11 +31,13 @@ export class SignupComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  togglePasswordVisibility() {
+  // Toggle password input visibility
+  togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  checkPasswordStrength() {
+  // Check password strength rules
+  checkPasswordStrength(): void {
     this.passwordLength = this.password.length >= 8;
     this.hasUppercase = /[A-Z]/.test(this.password);
     this.hasNumber = /[0-9]/.test(this.password);
@@ -47,7 +49,8 @@ export class SignupComponent {
       this.hasSpecial;
   }
 
-  onSubmit() {
+  // Handle signup form submission
+  onSubmit(): void {
     if (!this.isPasswordStrong) {
       this.errorMessage = 'Password does not meet strength requirements.';
       return;
@@ -61,18 +64,18 @@ export class SignupComponent {
     this.loading = true;
     this.errorMessage = '';
 
-    this.http
-      .post(`${environment.apiUrl}/signup`, {
-        user: { email: this.email, password: this.password }
-      }, { withCredentials: true })
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          this.loading = false;
-          this.errorMessage = error.error?.errors?.[0] || 'Signup failed.';
-        }
-      });
+    this.http.post(
+      `${environment.apiUrl}/signup`,
+      { user: { email: this.email, password: this.password } },
+      { withCredentials: true }
+    ).subscribe({
+      next: () => {
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage = error.error?.errors?.[0] || 'Signup failed.';
+      }
+    });
   }
 }

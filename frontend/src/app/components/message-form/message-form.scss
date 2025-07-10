@@ -1,15 +1,18 @@
+// Section title
 h2 {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
+// Form label styling
 label {
   margin-top: 12px;
   font-weight: 500;
   font-size: 14px;
 }
 
+// Input & Textarea shared styles
 input,
 textarea {
   width: 100%;
@@ -24,11 +27,13 @@ textarea {
   background: #fff;
 }
 
+// Specific styles for textarea
 textarea {
   min-height: 100px;
   resize: none;
 }
 
+// Character counter under message box
 .char-count {
   text-align: right;
   font-size: 12px;
@@ -36,6 +41,7 @@ textarea {
   margin-top: 4px;
 }
 
+// Container for clear & submit buttons
 .form-actions {
   display: flex;
   flex-wrap: wrap;
@@ -44,20 +50,20 @@ textarea {
   margin-top: 20px;
 }
 
-
+// Error message text
 .error {
   color: #e74c3c;
   font-size: 0.85rem;
   margin-top: 4px;
 }
 
-
+// Highlight invalid touched inputs
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border-color: #e74c3c;
 }
 
-
+// Clear button
 .clear {
   background: transparent;
   border: none;
@@ -67,6 +73,7 @@ textarea.ng-invalid.ng-touched {
   text-decoration: underline;
 }
 
+// Submit button
 .submit {
   background-color: black;
   color: white;
@@ -78,11 +85,13 @@ textarea.ng-invalid.ng-touched {
   transition: background-color 0.2s;
 }
 
+// Submit button disabled state
 .submit:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
+// Mobile responsiveness
 @media (max-width: 768px) {
   input,
   textarea {

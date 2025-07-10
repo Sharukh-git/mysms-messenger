@@ -1,9 +1,13 @@
 class Api::Users::SessionsController < Devise::SessionsController
   respond_to :json
 
+  # Allow login even if already authenticated
   skip_before_action :require_no_authentication, only: [:create]
+
+  # Force all requests to respond in JSON format
   before_action :ensure_json_request
 
+  # POST /login
   def create
     normalized_email = params.dig(:user, :email).to_s.strip.downcase
     password = params.dig(:user, :password)
@@ -18,6 +22,7 @@ class Api::Users::SessionsController < Devise::SessionsController
     end
   end
 
+  # DELETE /logout
   def destroy
     if current_user
       sign_out(current_user)
@@ -27,6 +32,7 @@ class Api::Users::SessionsController < Devise::SessionsController
     end
   end
 
+  # GET /check-session (optional)
   def show
     if current_user
       render json: { user: current_user }, status: :ok
@@ -37,6 +43,7 @@ class Api::Users::SessionsController < Devise::SessionsController
 
   private
 
+  # Ensure every request is treated as JSON (Devise default is HTML)
   def ensure_json_request
     request.format = :json
   end

@@ -1,7 +1,10 @@
 <div class="page-wrapper">
   <div class="auth-container">
     <h2>Sign Up</h2>
+
     <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+
+      <!-- Email input -->
       <label for="email">Email</label>
       <input
         type="email"
@@ -11,6 +14,7 @@
         required
       />
 
+      <!-- Password input with visibility toggle -->
       <label for="password">Password</label>
       <div class="password-wrapper">
         <input
@@ -26,7 +30,7 @@
         </button>
       </div>
 
-      <!-- Password strength guidance -->
+      <!-- Password strength rules -->
       <ul class="password-rules">
         <li [class.valid]="passwordLength">✔ Min 8 characters</li>
         <li [class.valid]="hasUppercase">✔ At least 1 uppercase</li>
@@ -34,6 +38,7 @@
         <li [class.valid]="hasSpecial">✔ At least 1 special character</li>
       </ul>
 
+      <!-- Confirm password field -->
       <label for="confirmPassword">Confirm Password</label>
       <input
         type="password"
@@ -44,19 +49,23 @@
         [ngClass]="{ 'input-error': confirmPassword && password !== confirmPassword }"
       />
 
+      <!-- Error for mismatch -->
       <div *ngIf="confirmPassword && password !== confirmPassword" class="error">
         Passwords do not match.
       </div>
 
+      <!-- Submit button -->
       <button
         type="submit"
         [disabled]="signupForm.invalid || !isPasswordStrong || password !== confirmPassword || loading">
         {{ loading ? 'Signing up...' : 'Sign Up' }}
       </button>
 
+      <!-- Server error message -->
       <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
     </form>
 
+    <!-- Navigation link -->
     <p class="link">
       Already have an account? <a routerLink="/login">Login</a>
     </p>
