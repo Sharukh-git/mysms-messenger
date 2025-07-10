@@ -1,8 +1,8 @@
 class Api::Users::SessionsController < Devise::SessionsController
   respond_to :json
 
-  
   skip_before_action :require_no_authentication, only: [:create]
+  before_action :ensure_json_request
 
   def create
     normalized_email = params.dig(:user, :email).to_s.strip.downcase
@@ -42,6 +42,10 @@ class Api::Users::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    
+    head :no_content
+  end
+
+  def ensure_json_request
+    request.format = :json
   end
 end
