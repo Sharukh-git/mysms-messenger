@@ -60,7 +60,7 @@ Status values are reflected in the message list UI in real-time.
 
 | **Dashboard View** | **Login Page** |
 |--------------------|----------------|
-| ![Dashboard](https://private-user-images.githubusercontent.com/175901016/464841156-4b1a1e1d-99c0-4645-94d1-f9631052914f.png) | ![Login](https://private-user-images.githubusercontent.com/175901016/464841157-7799b8d2-dea0-41ef-81a0-e64477d06243.png) |
+| ![Dashboard](./screenshots/dashboard.png) | ![Login](./screenshots/login.png) |
 
 ---
 
