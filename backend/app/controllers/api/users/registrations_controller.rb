@@ -1,9 +1,11 @@
 class Api::Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
-  # Override create to customize JSON response
   def create
-    build_resource(sign_up_params)
+    user_params = extract_user_params
+    return unless user_params 
+
+    build_resource(user_params)
 
     resource.save
     if resource.persisted?
@@ -16,9 +18,12 @@ class Api::Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: [e.message] }, status: :bad_request and return
+  def extract_user_params
+    if params[:user].present?
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    else
+      render json: { errors: ['Missing user object in request body.'] }, status: :bad_request
+      nil
+    end
   end
 end

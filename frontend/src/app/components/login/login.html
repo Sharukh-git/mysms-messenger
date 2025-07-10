@@ -1,41 +1,55 @@
 <div class="page-wrapper">
   <div class="auth-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        [(ngModel)]="email"
-        required
-      />
 
-      <label for="password">Password</label>
-      <div class="password-wrapper">
+    
+    <div *ngIf="isCheckingBackend" class="info-message">
+      🔄 Checking backend status...
+    </div>
+
+    
+    <div *ngIf="!isCheckingBackend && !isBackendReady" class="error-message">
+      ⚠️ Backend is starting... Please wait a moment.
+    </div>
+
+    
+    <ng-container *ngIf="isBackendReady">
+      <h2>Login</h2>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <label for="email">Email</label>
         <input
-          [type]="showPassword ? 'text' : 'password'"
-          id="password"
-          name="password"
-          [(ngModel)]="password"
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
           required
         />
-        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-          <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+          />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          </button>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!loginForm?.form || loginForm.invalid || loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
         </button>
-      </div>
 
-      <button
-        type="submit"
-        [disabled]="!loginForm?.form || loginForm.invalid || loading">
-        {{ loading ? 'Logging in...' : 'Login' }}
-      </button>
+        <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </form>
 
-      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
-    </form>
-
-    <p class="link">
-      Don't have an account? <a routerLink="/signup">Sign up</a>
-    </p>
+      <p class="link">
+        Don't have an account? <a routerLink="/signup">Sign up</a>
+      </p>
+    </ng-container>
   </div>
 </div>

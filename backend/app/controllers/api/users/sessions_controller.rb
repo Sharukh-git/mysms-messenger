@@ -1,21 +1,22 @@
 class Api::Users::SessionsController < Devise::SessionsController
   respond_to :json
 
-  # Allow login without blocking already-authenticated users
+  
   skip_before_action :require_no_authentication, only: [:create]
 
   def create
-    normalized_email = params[:user][:email].to_s.strip.downcase
+    normalized_email = params.dig(:user, :email).to_s.strip.downcase
+    password = params.dig(:user, :password)
+
     user = User.find_by(email: normalized_email)
 
-   if user&.valid_password?(params[:user][:password])
-    sign_in(user)
-    render json: { message: 'Logged in successfully.', user: user }, status: :ok
-   else
-    render json: { error: 'Invalid email or password' }, status: :unauthorized
-   end
+    if user&.valid_password?(password)
+      sign_in(user)
+      render json: { message: 'Logged in successfully.', user: user }, status: :ok
+    else
+      render json: { error: 'Invalid email or password' }, status: :unauthorized
+    end
   end
-
 
   def destroy
     if current_user
@@ -41,5 +42,6 @@ class Api::Users::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
+    
   end
 end

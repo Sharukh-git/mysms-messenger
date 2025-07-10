@@ -17,4 +17,7 @@ Rails.application.routes.draw do
 
   # Twilio webhook route
   post '/webhooks/sms_status', to: 'webhooks#sms_status'
+
+  # Ping route for wake-up check
+  get '/ping', to: proc { [200, {}, ['pong']] }
 end

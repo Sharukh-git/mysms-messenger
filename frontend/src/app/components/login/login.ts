@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { PingService } from '../../services/ping.service';
+
 
 @Component({
   selector: 'app-login',
@@ -18,8 +20,11 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
   showPassword = false;
+  isBackendReady = false;
+  isCheckingBackend = true;
 
-  constructor(private http: HttpClient, private router: Router) {}
+
+  constructor(private http: HttpClient, private router: Router, private pingService: PingService) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -43,4 +48,18 @@ export class LoginComponent {
         }
       });
   }
+
+  ngOnInit(): void {
+  this.pingService.pingBackend().subscribe({
+    next: () => {
+      this.isBackendReady = true;
+      this.isCheckingBackend = false;
+    },
+    error: () => {
+      this.isBackendReady = false;
+      this.isCheckingBackend = false;
+    }
+  });
+ }
+
 }
