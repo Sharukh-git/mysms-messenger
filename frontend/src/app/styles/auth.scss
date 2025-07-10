@@ -1,0 +1,148 @@
+/* auth.scss — shared login/signup styling */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.auth-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 24px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.auth-container label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Target only the submit button inside the form */
+.auth-container form > button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+}
+
+.auth-container form > button[type='submit']:hover {
+  background: #0056cc;
+}
+
+.auth-container form > button[type='submit']:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.auth-container .error {
+  color: red;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-container .link {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.auth-container .link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.auth-container .link a:hover {
+  text-decoration: underline;
+}
+
+.password-rules {
+  margin: 8px 0 16px;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #888;
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .valid {
+    color: green;
+    font-weight: 500;
+  }
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.password-wrapper {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding-right: 40px;
+  }
+
+  .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-100%);
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+  }
+
+  .toggle-password:focus {
+    outline: none;
+  }
+
+  .fa {
+    pointer-events: none;
+  }
+}

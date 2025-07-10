@@ -1,4 +1,7 @@
 class WebhooksController < ApplicationController
+  
+  skip_before_action :authenticate_user!, only: [:sms_status]
+
   def sms_status
     sid = params["MessageSid"]
     status = params["MessageStatus"]

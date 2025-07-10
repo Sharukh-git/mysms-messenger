@@ -6,12 +6,37 @@ body {
   background-color: #f4f4f4;
 }
 
+/* Header section for title and logout */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1040px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+
 /* Page Title */
 h1.title {
-  text-align: center;
-  margin: 40px 0 20px;
   font-size: 28px;
   font-weight: 700;
+  margin: 0;
+}
+
+/* Logout Button */
+.logout-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #5548d9;
 }
 
 /* Layout container for form and message list */
@@ -22,7 +47,7 @@ h1.title {
   align-items: stretch;
   gap: 40px;
   max-width: 1040px;
-  margin: 0 auto 60px;
+  margin: 40px auto 60px;
   padding: 0 20px;
 }
 
@@ -137,6 +162,23 @@ button.clear:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  .logout-button {
+    width: 100%;
+    max-width: 200px;
+  }
+
   .container {
     flex-direction: column;
     align-items: center;
@@ -149,11 +191,5 @@ button.clear:hover {
     min-width: 100%;
     max-width: 100%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  }
-
-  .title {
-    font-size: 1.6rem;
-    margin: 1.5rem 0;
-    text-align: center;
   }
 }

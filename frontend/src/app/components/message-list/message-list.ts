@@ -41,7 +41,7 @@ export class MessageListComponent implements OnInit, AfterViewChecked {
       next: (data: any[]) => {
         this.messages = data;
         this.loading = false;
-        this.scrollToBottom(); // Ensure scroll immediately after load
+        this.scrollToBottom();
       },
       error: (err) => {
         console.error('Error fetching messages:', err);

@@ -1,17 +1,13 @@
 class Api::MessagesController < ApplicationController
+  before_action :authenticate_user!
   require 'twilio-ruby'
 
   def index
-    session_id = request.session[:session_id]
-    Rails.logger.info "🔍 INDEX SESSION: #{session_id}"
-    messages = Message.where(session_id: session_id).order(created_at: :desc)
+    messages = current_user.messages.order_by(created_at: :desc)
     render json: messages
   end
 
   def create
-    session_id = request.session[:session_id] ||= SecureRandom.hex(10)
-    Rails.logger.info "📝 CREATE SESSION: #{session_id}"
-    Rails.logger.info "✅ ENV['APP_BASE_URL'] = #{ENV['APP_BASE_URL']}"
     to = params[:to]
     body = params[:body]
 
@@ -25,23 +21,19 @@ class Api::MessagesController < ApplicationController
         status_callback: "#{ENV['APP_BASE_URL']}/webhooks/sms_status"
       )
 
-      status = 'sent'
-      message = Message.create(
+      message = current_user.messages.create!(
         to: to,
         body: body,
-        status: status,
-        session_id: session_id,
+        status: 'sent',
         twilio_sid: twilio_message.sid
       )
 
     rescue => e
       Rails.logger.error "Twilio Error: #{e.message}"
-      status = 'failed'
-      message = Message.create(
+      message = current_user.messages.create!(
         to: to,
         body: body,
-        status: status,
-        session_id: session_id
+        status: 'failed'
       )
     end
 

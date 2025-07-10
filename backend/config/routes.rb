@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
+  # Devise routes for API
+  devise_for :users, skip: [:sessions, :registrations], defaults: { format: :json }
+
   namespace :api do
+    # Custom Devise controllers for API
+    devise_scope :user do
+      post 'signup', to: 'users/registrations#create'
+      post 'login', to: 'users/sessions#create'
+      delete 'logout', to: 'users/sessions#destroy'
+      get 'me', to: 'users/sessions#show'
+    end
+
+    # SMS messages
     resources :messages, only: [:create, :index]
   end
-  # Webhook route for Twilio SMS status updates
-  post '/webhooks/sms_status', to: 'webhooks#sms_status'
 
+  # Twilio webhook route
+  post '/webhooks/sms_status', to: 'webhooks#sms_status'
 end
-# This file defines the routes for the API namespace, specifically for the MessagesController.
-# It allows the creation of messages via a POST request to /api/messages.

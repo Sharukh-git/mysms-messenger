@@ -5,8 +5,9 @@ class Message
   field :to, type: String
   field :body, type: String
   field :status, type: String
-  field :session_id, type: String
   field :twilio_sid, type: String
 
-  validates :to, :body, :session_id, presence: true
+  belongs_to :user
+
+  validates :to, :body, presence: true
 end
