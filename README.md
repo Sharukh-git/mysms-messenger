@@ -6,7 +6,9 @@ MySMS Messenger is a full-stack web application that enables users to send and v
 
 ## 🌐 Live Demo
 
-🔗 [View Live App](https://mysms-messenger.vercel.app)
+🔗 [View Live App](https://mysms-messenger.vercel.app) 
+
+> ⚠️ **Note**: Due to Twilio free account limitations, messages can only be sent to this verified number: **+1 (877) 780-4236** (Twilio virtual number)
 
 - 🔧 Backend: [https://mysms-messenger.onrender.com](https://mysms-messenger.onrender.com)  
 - 💻 GitHub: [Sharukh-git/mysms-messenger](https://github.com/Sharukh-git/mysms-messenger)
@@ -51,6 +53,23 @@ MySMS Messenger is a full-stack web application that enables users to send and v
 
 Twilio's status callback URL is used to update the delivery status of each SMS.  
 Status values are reflected in the message list UI in real-time.
+
+---
+
+### 📸 UI Screenshots
+
+| **Dashboard View** | **Login Page** |
+|--------------------|----------------|
+| ![Dashboard](https://private-user-images.githubusercontent.com/175901016/464841156-4b1a1e1d-99c0-4645-94d1-f9631052914f.png) | ![Login](https://private-user-images.githubusercontent.com/175901016/464841157-7799b8d2-dea0-41ef-81a0-e64477d06243.png) |
+
+---
+
+### 🧪 Test Account (for demo)
+
+You can either create a new account, or use the test credentials below:
+
+Email: testaccount@example.com
+Password: Testlogin$54321
 
 ---
 
