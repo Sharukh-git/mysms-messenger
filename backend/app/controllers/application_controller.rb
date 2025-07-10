@@ -4,6 +4,12 @@ class ApplicationController < ActionController::API
   include Devise::Controllers::Helpers
 
   before_action :authenticate_user!
-  
+
+  private
+
+  def authenticate_user!(opts = {})
+    unless user_signed_in?
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
+  end
 end
-# This controller serves as the base controller for the API, ensuring that all requests are authenticated.
