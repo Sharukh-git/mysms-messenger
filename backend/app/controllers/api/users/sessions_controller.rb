@@ -2,6 +2,8 @@ class Api::Users::SessionsController < Devise::SessionsController
   respond_to :json
 
   skip_before_action :require_no_authentication, only: [:create]
+  skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: [:create, :show, :destroy]
   before_action :ensure_json_request
 
   def create

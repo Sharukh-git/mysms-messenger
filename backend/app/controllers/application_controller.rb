@@ -3,10 +3,16 @@ class ApplicationController < ActionController::API
   include ActionController::Helpers
   include Devise::Controllers::Helpers
 
-  before_action :ensure_json_request 
-  before_action :authenticate_user!
+  before_action :ensure_json_request
+  before_action :authenticate_user_unless_devise
 
   private
+
+  def authenticate_user_unless_devise
+    unless devise_controller?
+      authenticate_user!
+    end
+  end
 
   def authenticate_user!(opts = {})
     unless user_signed_in?
