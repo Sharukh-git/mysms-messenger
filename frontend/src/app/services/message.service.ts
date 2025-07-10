@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
-// Message interface
 export interface Message {
   to: string;
   body: string;
@@ -19,15 +18,24 @@ export class MessageService {
   constructor(private http: HttpClient) {}
 
   sendMessage(to: string, body: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json'
+    });
+
     return this.http.post(`${this.apiUrl}/messages`, { to, body }, {
-      withCredentials: true
+      withCredentials: true,
+      headers: headers
     });
   }
 
-  // ✅ Properly typed to fix TS2769 error
   getMessages(): Observable<Message[]> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json'
+    });
+
     return this.http.get<Message[]>(`${this.apiUrl}/messages`, {
-      withCredentials: true
+      withCredentials: true,
+      headers: headers
     });
   }
 }
