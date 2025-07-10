@@ -20,4 +20,7 @@ Rails.application.routes.draw do
 
   # Ping route for wake-up check
   get '/ping', to: proc { [200, {}, ['pong']] }
+
+  # root path and prevent 404 after login redirect
+  root to: proc { [200, { 'Content-Type' => 'text/plain' }, ['MySMS Messenger API']] }
 end
